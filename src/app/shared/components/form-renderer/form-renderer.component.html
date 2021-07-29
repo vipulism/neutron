@@ -5,7 +5,7 @@ autocomplete="off"
     <div class="row" *ngIf="labels">
         <div class="col-md-12" *ngFor="let field of labels; let i = index">
 
-
+        <ng-container *ngIf="fieldList[i]?.type">
             <div [ngSwitch]="fieldList[i].type">
                 <div *ngSwitchCase="'TEXT_INPUT'">
                     <mat-form-field appearance="legacy">
@@ -54,9 +54,13 @@ autocomplete="off"
 
                 <div *ngSwitchDefault>output2</div>
             </div>
-           
+        </ng-container>
 
         </div>
+    </div>
+
+    <div class="col-md-12 text-right">
+        <button mat-flat-button color="primary" (click)="frmSubmit()" >Submit</button>
     </div>
 
 </form>

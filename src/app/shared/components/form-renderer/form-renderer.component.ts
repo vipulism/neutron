@@ -19,4 +19,9 @@ export class FormRendererComponent implements OnInit {
 
         this.labels = Object.keys(this.form.value)
      }
+
+     frmSubmit(){
+         console.log(this.form.value);
+         
+     }
 }

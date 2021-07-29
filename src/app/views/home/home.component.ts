@@ -19,7 +19,6 @@ interface dragDropList {
 export class HomeComponent implements OnInit {
     neutronForm!:FormGroup;
 
-    @ViewChild('dropList', { read:CdkDropList}) dropList : CdkDropList
    
     constructor(
         private formBuilder: FormBuilder
@@ -68,9 +67,10 @@ export class HomeComponent implements OnInit {
      }
 
      setForm(){
-        const savedForm = localStorage.getItem('forms')
+        const savedForm = localStorage.getItem('forms') 
         if(savedForm){
             this.sectionList = JSON.parse(savedForm) 
+            this.buildForm()
         }
      }
 
@@ -131,7 +131,6 @@ export class HomeComponent implements OnInit {
 
       updateItem(params:UpdateItem){
          this.sectionList[params.sectionIndex].elements[params.itemIndex] = { ...this.sectionList[params.sectionIndex].elements[params.itemIndex], ...params.item}
-       
       }
 
     saveForm(){
@@ -163,7 +162,6 @@ export class HomeComponent implements OnInit {
         })
         
        console.log(this.form.value);
-       
     }
 
    get getFieldList():ToolbarItemModel[]{

@@ -55,7 +55,6 @@
                     *ngFor="let item of sectionList; let sectionIndex = index"
                     class="section-card" 
                     cdkDropList
-                    #dropList
                     [id]="item.id"
                     [cdkDropListData]="item.elements"
                     (cdkDropListDropped)="drop($event)"
