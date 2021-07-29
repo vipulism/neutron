@@ -45,6 +45,11 @@ export class FormFieldsComponent implements OnInit {
         this.subscription.unsubscribe()
     }
 
+     /**
+      * This function is used to initiate final form
+      *
+      * @memberof FormFieldsComponent
+      */
      formInit(){
          this.form = this.formBuilder.group({
              label:[
@@ -81,6 +86,12 @@ export class FormFieldsComponent implements OnInit {
         return this.form.controls.options as FormArray;
       }
 
+     /**
+      * This function is used to add Chips( options ) in form field
+      *
+      * @param {MatChipInputEvent} event
+      * @memberof FormFieldsComponent
+      */
      addOption(event: MatChipInputEvent): void {
         const input = event.input;
         const value = event.value;
@@ -96,6 +107,12 @@ export class FormFieldsComponent implements OnInit {
         }
       }
     
+      /**
+       * This function is used to remove chips( options ) from form field
+       *
+       * @param {string} fruit
+       * @memberof FormFieldsComponent
+       */
       removeOption(fruit: string): void {
         const index = this.formOptions.value.indexOf(fruit);
         if (index >= 0) {
@@ -105,11 +122,22 @@ export class FormFieldsComponent implements OnInit {
     
        
 
+     /**
+      * This function is used to delete form field 
+      *
+      * @memberof FormFieldsComponent
+      */
      onDelete(){
          this.delete.emit({sectionIndex:this.sectionIndex, itemIndex:this.itemIndex})
      }
 
 
+     /**
+      * This functions will trigger when user fill the form 
+      *
+      * @param {ToolbarItemModel} item
+      * @memberof FormFieldsComponent
+      */
      onChange(item:ToolbarItemModel){
          this.update.emit({
             sectionIndex:this.sectionIndex,

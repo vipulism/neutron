@@ -20,6 +20,11 @@ export class FormRendererComponent implements OnInit {
         this.labels = Object.keys(this.form.value)
      }
 
+     /**
+      * This functions is used to log final form data on submit
+      *
+      * @memberof FormRendererComponent
+      */
      frmSubmit(){
          console.log(this.form.value);
          

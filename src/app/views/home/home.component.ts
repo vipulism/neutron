@@ -63,11 +63,16 @@ export class HomeComponent implements OnInit {
         
 
     ngOnInit() {
-        this.setForm();
+        this.setupForm();
         this.addSection();
      }
 
-     setForm(){
+     /**
+      * This function is used to set data if previously saved 
+      *
+      * @memberof HomeComponent
+      */
+     setupForm(){
         const savedForm = localStorage.getItem('forms') 
         if(savedForm){
             this.sectionList = JSON.parse(savedForm) 
@@ -75,6 +80,12 @@ export class HomeComponent implements OnInit {
         }
      }
 
+    /**
+     * This function will trigger whenever user drop item in section
+     *
+     * @param {CdkDragDrop<ToolbarItemModel[]>} event
+     * @memberof HomeComponent
+     */
     drop(event: CdkDragDrop<ToolbarItemModel[]>):void {
         if (event.previousContainer === event.container) {
           moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -90,6 +101,11 @@ export class HomeComponent implements OnInit {
         }
     }
 
+    /**
+     * This Function is used add section
+     *
+     * @memberof HomeComponent
+     */
     addSection():void{
         const newItem:dragDropList = {
             id:`section-${this.sectionList.length}`,
@@ -99,58 +115,90 @@ export class HomeComponent implements OnInit {
         this.sectionList.push(newItem)
     }
 
+    /**
+     * This function is used to remove section
+     *
+     * @param {number} secIndex
+     * @memberof HomeComponent
+     */
     removeSection(secIndex:number):void{
         this.sectionList.splice(secIndex, 1)
         console.log(this.sectionList);
         
     }
-
-    drop2(event: CdkDragDrop<ToolbarItemModel[]>):void {
-        debugger
-        if (event.previousContainer === event.container) {
-          moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        } else {
+ 
 
 
-          copyArrayItem(event.previousContainer.data,
-                            event.container.data,
-                            event.previousIndex,
-                            event.currentIndex);
-
-                            
-        }
-    }
-
-
-      noReturnPredicate() {
+      /**
+       * This functions is used to restrict drop items in toolbar area
+       *
+       * @return {*}  {boolean}
+       * @memberof HomeComponent
+       */
+      noReturnPredicate():boolean {
         return false;
       }
 
-      deleteItem(params:DeleteParam){
+      /**
+       * This function is used to delete form field in section
+       *
+       * @param {DeleteParam} params
+       * @memberof HomeComponent
+       */
+      deleteItem(params:DeleteParam):void{
           this.sectionList[params.sectionIndex].elements.splice(params.itemIndex, 1)
       }
 
-      updateItem(params:UpdateItem){
+      /**
+       * This functions is used to updated form
+       *
+       * @param {UpdateItem} params
+       * @memberof HomeComponent
+       */
+      updateItem(params:UpdateItem):void{
          this.sectionList[params.sectionIndex].elements[params.itemIndex] = { ...this.sectionList[params.sectionIndex].elements[params.itemIndex], ...params.item}
       }
 
-    saveForm(){
+    /**
+     * This function is used to save form data in localstorage 
+     *
+     * @memberof HomeComponent
+     */
+    saveForm():void{
         console.log(this.sectionList);
         localStorage.setItem('forms', JSON.stringify(this.sectionList))
     }
 
-    onFieldAdd(event:any){
+    /**
+     * This functions is handle data after a new form field added 
+     *
+     * @param {*} event
+     * @memberof HomeComponent
+     */
+    onFieldAdd(event:any):void{
         console.log(event);
         
     }
 
+    /**
+     * This function is used to convert form labe in to camel case 
+     *
+     * @param {string} str
+     * @return {*}  {string}
+     * @memberof HomeComponent
+     */
     camelize(str:string):string {
         return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
           return index === 0 ? word.toLowerCase() : word.toUpperCase();
         }).replace(/\s+/g, '');
       }
 
-    buildForm(){
+    /**
+     * This function us used to build final form 
+     *
+     * @memberof HomeComponent
+     */
+    buildForm():void{
         this.form = this.formBuilder.group({})
 
          this.sectionList.map(section => {
@@ -165,6 +213,13 @@ export class HomeComponent implements OnInit {
        console.log(this.form.value);
     }
 
+   /**
+    * This method is used to get labels for final form
+    *
+    * @readonly
+    * @type {ToolbarItemModel[]}
+    * @memberof HomeComponent
+    */
    get getFieldList():ToolbarItemModel[]{
 
         const arr:ToolbarItemModel[] = []
