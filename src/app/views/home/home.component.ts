@@ -18,7 +18,7 @@ interface dragDropList {
 
 export class HomeComponent implements OnInit {
     neutronForm!:FormGroup;
-
+    formBuilt = false
    
     constructor(
         private formBuilder: FormBuilder
@@ -76,7 +76,6 @@ export class HomeComponent implements OnInit {
         const savedForm = localStorage.getItem('forms') 
         if(savedForm){
             this.sectionList = JSON.parse(savedForm) 
-            this.buildForm()
         }
      }
 
@@ -211,6 +210,7 @@ export class HomeComponent implements OnInit {
         })
         
        console.log(this.form.value);
+       this.formBuilt = true
     }
 
    /**

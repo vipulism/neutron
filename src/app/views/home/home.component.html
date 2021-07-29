@@ -4,7 +4,7 @@
         
         <div  cdkDropListGroup>
         <div class="row">
-               <div class="col-2">
+               <div *ngIf="!formBuilt" class="col-2">
                 <mat-card>
                 <div class="example-container">
                     <h2>To do</h2>
@@ -30,7 +30,7 @@
                   </div>
                  </mat-card>
                </div>
-              <div class="col">
+              <div *ngIf="!formBuilt" class="col">
 
                 <div class="drop-container"
                 style="padding: 10px;" >
@@ -80,7 +80,7 @@
 
               </div>
 
-              <div class="col">
+              <div *ngIf="formBuilt" class="col col-3 m-auto">
                   <mat-card>
                       
                     <form-renderer *ngIf="form && getFieldList.length" [form]="form" [fieldList]="getFieldList"></form-renderer>

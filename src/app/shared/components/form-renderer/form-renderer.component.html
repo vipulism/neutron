@@ -3,8 +3,8 @@ autocomplete="off"
 [formGroup]="form">
 
     <div class="row" *ngIf="labels">
-        <div class="col-md-12" *ngFor="let field of labels; let i = index">
-
+        <div class="col-md-12" style="padding-bottom: 10px;" *ngFor="let field of labels; let i = index">
+ 
         <ng-container *ngIf="fieldList[i]?.type">
             <div [ngSwitch]="fieldList[i].type">
                 <div *ngSwitchCase="'TEXT_INPUT'">
