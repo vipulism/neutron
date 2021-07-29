@@ -1,0 +1,62 @@
+<form  *ngIf="form"
+autocomplete="off"
+[formGroup]="form">
+
+    <div class="row" *ngIf="labels">
+        <div class="col-md-12" *ngFor="let field of labels; let i = index">
+
+
+            <div [ngSwitch]="fieldList[i].type">
+                <div *ngSwitchCase="'TEXT_INPUT'">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>{{fieldList[i].label}}</mat-label>
+                        <input [formControlName]="field" matInput placeholder="Placeholder">
+                      </mat-form-field>
+                </div> 
+
+                <div *ngSwitchCase="'DATE'">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Choose a date</mat-label>
+                        <input [formControlName]="field" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                </div>
+
+                <div *ngSwitchCase="'CHECK_BOX'">
+                    {{fieldList[i].label}}
+                    <ul>
+                        <li *ngFor="let subtask of fieldList[i].options">
+                            <mat-checkbox [formControlName]="field">
+                            {{subtask}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
+                </div>
+
+                <div *ngSwitchCase="'RADIO'">
+                    <div style="padding-bottom: 10px;">{{fieldList[i].label}}</div>
+                    <mat-radio-group   [formControlName]="field">
+                        <mat-radio-button style="padding-right: 10px;" *ngFor="let option of fieldList[i].options" [value]="option">{{option}}</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+
+                <div *ngSwitchCase="'SINGLE_SELECT'">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> {{fieldList[i].label}}</mat-label>
+                        <mat-select [formControlName]="field">
+                          <mat-option *ngFor="let option of fieldList[i].options" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+
+                <div *ngSwitchDefault>output2</div>
+            </div>
+           
+
+        </div>
+    </div>
+
+</form>

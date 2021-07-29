@@ -1,0 +1,39 @@
+<div class="neutron-field">
+  <form
+  class="flex-grow-1"
+    *ngIf="form"
+    autocomplete="off"
+    [formGroup]="form">
+    
+   <div class="pb-10">
+    <mat-form-field appearance="legacy" class="w-100">
+      <mat-label>Field label</mat-label>
+      <input formControlName="label" matInput placeholder="Enter Label">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+   </div>
+
+
+      <mat-form-field *ngIf="item.options" class="w-100">
+        <mat-chip-list #chipList formArrayName="options">
+            <mat-chip *ngFor="let option of formOptions.value" [selectable]="selectable" [removable]="removable"
+                (removed)="removeOption(option)">
+                {{option}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Add options..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="addOption($event)">
+  </mat-chip-list>
+    </mat-form-field>
+
+   </form>
+
+      <div class="neutron-field__options">
+          <button (click)="onDelete()" color="warn" mat-icon-button  >
+            <mat-icon [inline]="true">delete</mat-icon>
+          </button>
+      </div>
+</div>  

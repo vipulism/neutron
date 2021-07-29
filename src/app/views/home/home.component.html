@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Home
+            </h2>
+        </div>
+        
+        <div cdkDropListGroup>
+        <div class="row">
+               <div class="col-2">
+                <mat-card>
+                <div class="example-container">
+                    <h2>To do</h2>
+                
+                    <div
+                      cdkDropList
+                      [cdkDropListData]="elements"
+                      cdkDropListSortingDisabled
+                      [cdkDropListEnterPredicate]="noReturnPredicate"
+                      class="toolbar"
+                      >
+
+                      <mat-list role="list">
+                        <mat-list-item  (dropped)="onFieldAdd($event)" [cdkDragData]="item" class="toolbar__item" role="listitem" *ngFor="let item of elements" cdkDrag> 
+                                <mat-icon>{{item.icon}}</mat-icon>{{item.title}}
+                            <mat-icon  *cdkDragPreview>{{item.icon}}</mat-icon>
+                            <mat-list-item  *cdkDragPlaceholder>
+                                <mat-icon>{{item.icon}}</mat-icon>{{item.title}}
+                            </mat-list-item>
+                        </mat-list-item>
+                      </mat-list>
+                    </div>
+                  </div>
+                 </mat-card>
+               </div>
+              <div class="col">
+
+                <div class="drop-container"
+                style="padding: 10px;" >
+                <div class="actions">
+                    <button mat-button (click)="addSection()" color="accent">
+                        <mat-icon>add</mat-icon> Section
+                      </button>
+    
+                      <button mat-button (click)="saveForm()" color="accent">
+                        <mat-icon>save</mat-icon> Save
+                      </button>
+
+                      <button mat-button (click)="buildForm()" color="accent">
+                        <mat-icon>build</mat-icon> Build Form
+                      </button>
+    
+                </div>
+                    <mat-card 
+                    *ngFor="let item of sectionList; let sectionIndex = index"
+                    class="section-card" 
+                    cdkDropList
+                    #dropList
+                    [id]="item.id"
+                    [cdkDropListData]="item.elements"
+                    (cdkDropListDropped)="drop($event)"
+                   
+                    >
+
+                    <button (click)="removeSection(sectionIndex)" color="#000" mat-icon-button class="section-cross">
+                        <mat-icon    [inline]="true">close</mat-icon>
+                    </button>
+
+                    <h5>Section {{sectionIndex + 1}}</h5>
+
+                    <div style="margin-bottom: 10px;" cdkDrag  [cdkDragData]="el"  *ngFor="let el of item.elements; let i = index">
+                       <div class="border neutron-field__wrapper" >
+                        <span class="dragable">
+                            <mat-icon [inline]="true" cdkDragHandle>drag_handle</mat-icon>
+                        </span>
+                        <form-fields class="flex-grow-1" (update)="updateItem($event)" (delete)="deleteItem($event)" [sectionIndex]="sectionIndex" [itemIndex]="i" [item]="el"></form-fields>
+                       </div>
+                    </div>
+                    
+                    </mat-card>
+                    
+                </div>
+
+
+              </div>
+
+              <div class="col">
+                  <mat-card>
+                      
+                    <form-renderer *ngIf="form && getFieldList.length" [form]="form" [fieldList]="getFieldList"></form-renderer>
+                  </mat-card>
+              </div>
+               
+              </div>
+        </div>
+                  
+    </div>
+</div>

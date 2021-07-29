@@ -1,0 +1,36 @@
+.neutron-field{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 0px 10px;
+
+    &__wrapper{
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  
+        
+        .dragable{
+            color: #ccc;
+            font-size: 24px;
+            cursor: move;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    &__options{
+        display: flex;
+        flex-direction: column;
+
+        
+        padding-left: 5px;
+        margin-left: 5px;
+        border-left: 1px solid #ccc;
+        button{
+            font-size: 18px;
+        }
+    }
+}
