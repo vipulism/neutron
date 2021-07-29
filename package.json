@@ -4,9 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run docs",
+    "docs":"mkdir -p ./dist/docs && npm run compodoc",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "compodoc": "npx compodoc -p tsconfig.doc.json  -d ./dist/docs"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +31,7 @@
     "@angular-devkit/build-angular": "~12.1.3",
     "@angular/cli": "~12.1.3",
     "@angular/compiler-cli": "~12.1.0-",
+    "@compodoc/compodoc": "^1.1.14",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",
