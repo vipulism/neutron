@@ -63,7 +63,8 @@ export class HomeComponent implements OnInit {
         
 
     ngOnInit() {
-        this.setForm()
+        this.setForm();
+        this.addSection();
      }
 
      setForm(){
