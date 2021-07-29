@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && npm run docs",
-    "docs":"mkdir -p ./dist/docs && npm run compodoc",
+    "docs":"mkdir -p ./src/assets/docs && npm run compodoc",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "compodoc": "npx compodoc -p tsconfig.doc.json  -d ./dist/docs"
